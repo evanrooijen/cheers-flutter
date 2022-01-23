@@ -38,4 +38,4 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
-      - run: flutter build appbundle --debug
+      - run: flutter build appbundle --target-platform android-arm,android-arm64
