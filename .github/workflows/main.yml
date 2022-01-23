@@ -70,4 +70,4 @@ jobs:
           cache-path: ${{ runner.tool_cache }}/flutter # optional, change this to specify the cache path
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build apk --debug --splt-per-abi
+      - run: flutter build apk --debug --split-per-abi
