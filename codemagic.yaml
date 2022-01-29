@@ -5,6 +5,10 @@ workflows:
         - push
         - pull_request
         - tag
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
     name: Android Workflow
     max_build_duration: 60
     cache:
