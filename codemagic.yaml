@@ -12,6 +12,8 @@ workflows:
         - "$FLUTTER_ROOT/.pub-cache"
         - "$HOME/.gradle/caches"
     environment:
+      vars:
+        PACKAGE_NAME: "com.evanrooijen.cheers"
       groups:
         - keystore_credentials
         - google_play
