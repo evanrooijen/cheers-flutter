@@ -37,8 +37,9 @@ workflows:
 
       - name: Flutter unit tests
         script: |
-          cd . && flutter test
+          cd . && flutter test --machine > test-results/flutter.json
         ignore_failure: true
+        test_report: test-results/flutter.json
 
       - name: Build APK with Flutter
         script: |
