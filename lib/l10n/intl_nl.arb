@@ -1,0 +1,19 @@
+{
+    "helloWorld": "Hallo Wereld!",
+    "password": "Wachtwoord",
+    "requiredErrorText": "This field cannot be empty.",
+    "equalErrorText": "This field value must be equal to {value}.",
+    "notEqualErrorText": "This field value must not be equal to {value}.",
+    "minErrorText": "Value must be greater than or equal to {min}.",
+    "minLengthErrorText": "Value must have a length greater than or equal to {minLength}",
+    "maxErrorText": "Value must be less than or equal to {max}",
+    "maxLengthErrorText": "Value must have a length less than or equal to {maxLength}",
+    "emailErrorText": "This field requires a valid email address.",
+    "urlErrorText": "This field requires a valid URL address.",
+    "matchErrorText": "Value does not match pattern.",
+    "numericErrorText": "Value must be numeric.",
+    "integerErrorText": "Value must be an integer.",
+    "creditCardErrorText": "This field requires a valid credit card number.",
+    "ipErrorText": "This field requires a valid IP.",
+    "dateStringErrorText": "This field requires a valid date string."
+}

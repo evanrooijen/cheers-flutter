@@ -4,9 +4,13 @@ import 'package:cheers/auth/bloc/auth_bloc.dart';
 import 'package:cheers/login/bloc/login_bloc.dart';
 import 'package:cheers/register/bloc/register_bloc.dart';
 import 'package:cheers/router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:go_router/go_router.dart';
 
 import 'firebase_options.dart';
@@ -17,6 +21,9 @@ Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform);
+      if (kDebugMode) {
+        await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+      }
       runApp(MyApp(
         authRepository: AuthRepository(),
       ));
@@ -48,6 +55,11 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
+          supportedLocales: const [Locale('en')],
+          localizationsDelegates: const [
+            ...AppLocalizations.localizationsDelegates,
+            FormBuilderLocalizations.delegate
+          ],
           routeInformationParser: router.routeInformationParser,
           routerDelegate: router.routerDelegate,
           debugShowCheckedModeBanner: false,
@@ -105,6 +117,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(AppLocalizations.of(context)!.helloWorld),
             MaterialButton(
               child: const Text('Login'),
               onPressed: () => context.pushNamed(
