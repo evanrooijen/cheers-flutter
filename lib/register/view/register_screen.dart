@@ -25,13 +25,15 @@ class RegisterScreen extends StatelessWidget {
                 child: const RegisterForm(),
                 listener: (context, state) => {
                   state.whenOrNull(
-                      failed: () => {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('Error: Registration failed'),
-                            ))
-                          })
+                    failed: () => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('Error: Registration failed'),
+                        ),
+                      )
+                    },
+                  )
                 },
               ),
             ],
