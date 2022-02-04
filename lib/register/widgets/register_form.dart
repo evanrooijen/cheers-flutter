@@ -67,7 +67,6 @@ class RegisterForm extends StatelessWidget {
 
   void _submitRegisterForm(FormBuilderState? formState, BuildContext context) {
     if (formState?.saveAndValidate() ?? false) {
-      debugPrint(formState?.value.toString());
       context.read<RegisterBloc>().add(RegisterEvent.request(
           formState?.value['email'], formState?.value['password']));
     }
