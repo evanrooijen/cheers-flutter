@@ -24,34 +24,39 @@ Future<void> main() async {
       if (kDebugMode) {
         await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
       }
-      runApp(MyApp(
-        authRepository: AuthRepository(),
-      ));
+      runApp(const MyApp());
     },
     blocObserver: AppBlocObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.authRepository}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
-  final AuthRepository authRepository;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(create: (_) => AuthRepository())
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             lazy: false,
-            create: (_) => AuthBloc(authRepository: authRepository),
+            create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
           BlocProvider(
-            create: (_) => LoginBloc(authRepository: authRepository),
+            create: (context) => LoginBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
           BlocProvider(
-            create: (_) => RegisterBloc(authRepository: authRepository),
+            create: (context) => RegisterBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
         ],
         child: MaterialApp.router(
