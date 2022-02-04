@@ -14,9 +14,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
-        foregroundColor: Colors.grey.shade800,
         elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -26,9 +24,8 @@ class LoginScreen extends StatelessWidget {
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) => {
                   state.whenOrNull(
-                    success: () => {
-                      context.goNamed(appRoutes[AppRoutes.home]!)
-                    },
+                    success: () =>
+                        {context.goNamed(appRoutes[AppRoutes.home]!)},
                     failed: () => {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

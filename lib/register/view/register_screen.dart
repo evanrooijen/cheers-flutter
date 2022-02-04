@@ -12,9 +12,7 @@ class RegisterScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Register'),
         centerTitle: true,
-        foregroundColor: Colors.grey.shade800,
         elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: Center(

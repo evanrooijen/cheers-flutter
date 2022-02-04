@@ -69,6 +69,11 @@ class MyApp extends StatelessWidget {
           routerDelegate: router.routerDelegate,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
+          darkTheme: ThemeData(
+            colorSchemeSeed: Colors.amber,
+            brightness: Brightness.dark,
+            useMaterial3: true,
+          ),
           theme: ThemeData(
             // This is the theme of your application.
             //
@@ -79,7 +84,8 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blue,
+            colorSchemeSeed: Colors.amber,
+            useMaterial3: true,
           ),
         ),
       ),
