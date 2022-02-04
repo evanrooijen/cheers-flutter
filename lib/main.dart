@@ -117,20 +117,19 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocalizations.of(context)!.helloWorld),
-            MaterialButton(
+            TextButton(
               child: const Text('Login'),
               onPressed: () => context.pushNamed(
                 appRoutes[AppRoutes.login]!,
               ),
             ),
-            MaterialButton(
+            TextButton(
               child: const Text('Register'),
               onPressed: () => context.pushNamed(
                 appRoutes[AppRoutes.register]!,
               ),
             ),
-            MaterialButton(
+            TextButton(
               child: const Text('Home'),
               onPressed: () => context.goNamed(
                 appRoutes[AppRoutes.home]!,
