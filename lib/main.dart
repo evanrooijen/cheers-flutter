@@ -24,34 +24,39 @@ Future<void> main() async {
       if (kDebugMode) {
         await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
       }
-      runApp(MyApp(
-        authRepository: AuthRepository(),
-      ));
+      runApp(const MyApp());
     },
     blocObserver: AppBlocObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.authRepository}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
-  final AuthRepository authRepository;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(create: (_) => AuthRepository())
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             lazy: false,
-            create: (_) => AuthBloc(authRepository: authRepository),
+            create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
           BlocProvider(
-            create: (_) => LoginBloc(authRepository: authRepository),
+            create: (context) => LoginBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
           BlocProvider(
-            create: (_) => RegisterBloc(authRepository: authRepository),
+            create: (context) => RegisterBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
           ),
         ],
         child: MaterialApp.router(
@@ -64,6 +69,11 @@ class MyApp extends StatelessWidget {
           routerDelegate: router.routerDelegate,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
+          darkTheme: ThemeData(
+            colorSchemeSeed: Colors.amber,
+            brightness: Brightness.dark,
+            useMaterial3: true,
+          ),
           theme: ThemeData(
             // This is the theme of your application.
             //
@@ -74,7 +84,8 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blue,
+            colorSchemeSeed: Colors.amber,
+            useMaterial3: true,
           ),
         ),
       ),
@@ -117,20 +128,19 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocalizations.of(context)!.helloWorld),
-            MaterialButton(
+            TextButton(
               child: const Text('Login'),
               onPressed: () => context.pushNamed(
                 appRoutes[AppRoutes.login]!,
               ),
             ),
-            MaterialButton(
+            TextButton(
               child: const Text('Register'),
               onPressed: () => context.pushNamed(
                 appRoutes[AppRoutes.register]!,
               ),
             ),
-            MaterialButton(
+            TextButton(
               child: const Text('Home'),
               onPressed: () => context.goNamed(
                 appRoutes[AppRoutes.home]!,

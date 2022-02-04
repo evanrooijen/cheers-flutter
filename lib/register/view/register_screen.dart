@@ -10,9 +10,9 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey.shade800),
+        title: const Text('Register'),
+        centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -23,13 +23,15 @@ class RegisterScreen extends StatelessWidget {
                 child: const RegisterForm(),
                 listener: (context, state) => {
                   state.whenOrNull(
-                      failed: () => {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('Error: Registration failed'),
-                            ))
-                          })
+                    failed: () => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('Error: Registration failed'),
+                        ),
+                      )
+                    },
+                  )
                 },
               ),
             ],

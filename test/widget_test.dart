@@ -16,7 +16,7 @@ void main() {
 
   testWidgets('Homepage Smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(authRepository: authRepository));
+    await tester.pumpWidget(const MyApp());
 
     // Verify that our navigation buttons are present
     expect(find.text('Login'), findsOneWidget);

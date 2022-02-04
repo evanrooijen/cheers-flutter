@@ -67,7 +67,6 @@ class LoginForm extends StatelessWidget {
 
   void _submitLoginForm(FormBuilderState? formState, BuildContext context) {
     if (formState?.saveAndValidate() ?? false) {
-      debugPrint(formState?.value.toString());
       context.read<LoginBloc>().add(LoginEvent.request(
           formState?.value['email'], formState?.value['password']));
     }
