@@ -5,10 +5,6 @@ workflows:
         - push
         - pull_request
         - tag
-      branch_patterns:
-        - pattern: "main"
-          include: true
-          source: true
     name: Android Workflow
     max_build_duration: 60
     cache:
@@ -16,13 +12,7 @@ workflows:
         - "$FLUTTER_ROOT/.pub-cache"
         - "$HOME/.gradle/caches"
     environment:
-      vars:
-        PACKAGE_NAME: "com.evanrooijen.cheers"
-      groups:
-        - keystore_credentials
-        - google_play
-        - other
-      flutter: "2.8.1"
+      flutter: "2.10.0"
     scripts:
       - name: Set up key properties
         script: |
@@ -54,4 +44,4 @@ workflows:
 
       - name: Build APK with Flutter
         script: |
-          cd . && flutter build apk --debug
+          cd . && flutter build appbundle --multidex --debug
