@@ -31,14 +31,20 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, FirebaseAuth? auth})
+      : _auth = auth,
+        super(key: key);
+
+  final FirebaseAuth? _auth;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthRepository>(create: (_) => AuthRepository())
+        RepositoryProvider<AuthRepository>(
+          create: (_) => AuthRepository(firebaseAuth: _auth),
+        )
       ],
       child: MultiBlocProvider(
         providers: [
